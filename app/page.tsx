@@ -144,14 +144,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950 dark:via-purple-950 dark:to-pink-950">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
             Mini Product Manager
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-indigo-700 dark:text-indigo-300">
             Manage your WooCommerce products with ease
           </p>
         </div>
@@ -167,7 +167,7 @@ export default function Home() {
         <div className="mb-6">
           <button
             onClick={() => setShowCreateForm(!showCreateForm)}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/50 transition-all transform hover:scale-105"
           >
             <Plus className="w-5 h-5" />
             {showCreateForm ? 'Cancel' : 'Add New Product'}
@@ -176,15 +176,15 @@ export default function Home() {
 
         {/* Create Product Form */}
         {showCreateForm && (
-          <div className="mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="mb-6 p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg border border-indigo-100 dark:border-indigo-900">
+            <h2 className="text-xl font-semibold text-indigo-900 dark:text-indigo-100 mb-4">
               Create New Product
             </h2>
             <form onSubmit={handleCreate} className="space-y-4">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-2"
                 >
                   Product Name
                 </label>
@@ -196,14 +196,14 @@ export default function Home() {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-indigo-200 dark:border-indigo-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-indigo-900/30 dark:text-white transition-colors"
                   placeholder="Enter product name"
                 />
               </div>
               <div>
                 <label
                   htmlFor="price"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-2"
                 >
                   Regular Price
                 </label>
@@ -217,14 +217,14 @@ export default function Home() {
                     setFormData({ ...formData, regular_price: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-indigo-200 dark:border-indigo-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-indigo-900/30 dark:text-white transition-colors"
                   placeholder="0.00"
                 />
               </div>
               <button
                 type="submit"
                 disabled={creating}
-                className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-medium rounded-lg transition-all shadow-md shadow-emerald-500/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transform hover:scale-105"
               >
                 {creating ? (
                   <>
@@ -245,48 +245,48 @@ export default function Home() {
         {/* Products List */}
         {loading ? (
           <div className="flex justify-center items-center py-12">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+            <Loader2 className="w-8 h-8 animate-spin text-indigo-600 dark:text-indigo-400" />
           </div>
         ) : products.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <p className="text-gray-600 dark:text-gray-400">
+          <div className="text-center py-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg border border-indigo-100 dark:border-indigo-900">
+            <p className="text-indigo-600 dark:text-indigo-400">
               No products found. Create your first product!
             </p>
           </div>
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg border border-indigo-100 dark:border-indigo-900 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+                <thead className="bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/50 dark:to-purple-900/50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                       Image
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                       ID
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                       Name
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                       Price
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white/50 dark:bg-gray-800/50 divide-y divide-indigo-100 dark:divide-indigo-900">
                   {products.map((product) => (
                     <tr
                       key={product.id}
-                      className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      className="hover:bg-indigo-50/50 dark:hover:bg-indigo-900/30 transition-colors"
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center border border-indigo-200 dark:border-indigo-800">
                           {product.images && product.images.length > 0 ? (
                             <img
                               src={product.images[0].src}
@@ -294,16 +294,16 @@ export default function Home() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <span className="text-gray-400 text-xs">
+                            <span className="text-indigo-400 dark:text-indigo-500 text-xs">
                               No Image
                             </span>
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-900 dark:text-indigo-100">
                         #{product.id}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 text-sm text-indigo-900 dark:text-indigo-100 font-medium">
                         {product.name}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -315,14 +315,14 @@ export default function Home() {
                               min="0"
                               value={newPrice}
                               onChange={(e) => setNewPrice(e.target.value)}
-                              className="w-24 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white text-sm"
+                              className="w-24 px-2 py-1 border border-indigo-300 dark:border-indigo-600 rounded focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-indigo-900/30 dark:text-white text-sm transition-colors"
                               placeholder={product.regular_price}
                               autoFocus
                             />
                             <button
                               onClick={() => handleUpdatePrice(product.id)}
                               disabled={updating === product.id}
-                              className="p-1 text-green-600 hover:text-green-700 disabled:opacity-50"
+                              className="p-1 text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 disabled:opacity-50 transition-colors"
                               title="Save"
                             >
                               {updating === product.id ? (
@@ -336,7 +336,7 @@ export default function Home() {
                                 setEditingPrice(null);
                                 setNewPrice('');
                               }}
-                              className="p-1 text-red-600 hover:text-red-700"
+                              className="p-1 text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
                               title="Cancel"
                             >
                               <X className="w-4 h-4" />
@@ -344,7 +344,7 @@ export default function Home() {
                           </div>
                         ) : (
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                            <span className="text-sm font-medium text-indigo-900 dark:text-indigo-100">
                               ${product.regular_price}
                             </span>
                             <button
@@ -352,7 +352,7 @@ export default function Home() {
                                 setEditingPrice(product.id);
                                 setNewPrice(product.regular_price);
                               }}
-                              className="p-1 text-blue-600 hover:text-blue-700"
+                              className="p-1 text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"
                               title="Edit Price"
                             >
                               <Edit2 className="w-4 h-4" />
@@ -364,8 +364,8 @@ export default function Home() {
                         <span
                           className={`px-2 py-1 text-xs font-medium rounded-full ${
                             product.status === 'publish'
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
-                              : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                              ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                              : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800'
                           }`}
                         >
                           {product.status}
@@ -375,7 +375,7 @@ export default function Home() {
                         <button
                           onClick={() => handleDelete(product.id)}
                           disabled={deleting === product.id}
-                          className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
+                          className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20 rounded-lg transition-all transform hover:scale-110 disabled:opacity-50"
                           title="Delete Product"
                         >
                           {deleting === product.id ? (

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@woocommerce/woocommerce-rest-api": "^1.0.2",
+    "axios": "^1.13.2",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",
     "react": "19.2.1",

@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import WooCommerceRestApi from '@woocommerce/woocommerce-rest-api';
+import { NextRequest, NextResponse } from "next/server";
+import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 
 // Initialize WooCommerce API client
 function getWooCommerceClient() {
@@ -8,14 +8,16 @@ function getWooCommerceClient() {
   const consumerSecret = process.env.WC_CONSUMER_SECRET;
 
   if (!url || !consumerKey || !consumerSecret) {
-    throw new Error('Missing WooCommerce configuration in environment variables');
+    throw new Error(
+      "Missing WooCommerce configuration in environment variables"
+    );
   }
 
   return new WooCommerceRestApi({
     url,
     consumerKey,
     consumerSecret,
-    version: 'wc/v3',
+    version: "wc/v3",
   });
 }
 
@@ -24,10 +26,10 @@ export async function GET(request: NextRequest) {
   try {
     const wooCommerce = getWooCommerceClient();
     const { searchParams } = new URL(request.url);
-    const page = searchParams.get('page') || '1';
-    const perPage = searchParams.get('per_page') || '10';
+    const page = searchParams.get("page") || "1";
+    const perPage = searchParams.get("per_page") || "10";
 
-    const response = await wooCommerce.get('products', {
+    const response = await wooCommerce.get("products", {
       page: parseInt(page),
       per_page: parseInt(perPage),
     });
@@ -35,15 +37,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data: response.data,
-      total: response.headers['x-wp-total'],
-      totalPages: response.headers['x-wp-totalpages'],
+      total: response.headers["x-wp-total"],
+      totalPages: response.headers["x-wp-totalpages"],
     });
-  } catch (error: any) {
-    console.error('Error fetching products:', error);
+  } catch (error: unknown) {
+    console.error("Error fetching products:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to fetch products";
     return NextResponse.json(
       {
         success: false,
-        error: error.message || 'Failed to fetch products',
+        error: errorMessage,
       },
       { status: 500 }
     );
@@ -54,39 +58,57 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, regular_price } = body;
+    const { name, regular_price, images } = body;
 
     if (!name || !regular_price) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Name and regular_price are required',
+          error: "Name and regular_price are required",
         },
         { status: 400 }
       );
     }
 
     const wooCommerce = getWooCommerceClient();
-    const response = await wooCommerce.post('products', {
+
+    // Prepare product data
+    interface ProductData {
+      name: string;
+      type: string;
+      regular_price: string;
+      status: string;
+      images?: Array<{ src: string; name?: string; alt?: string }>;
+    }
+
+    const productData: ProductData = {
       name,
-      type: 'simple',
+      type: "simple",
       regular_price,
-      status: 'publish',
-    });
+      status: "publish",
+    };
+
+    // Add images if provided
+    if (images && images.length > 0) {
+      productData.images = images;
+    }
+
+    const response = await wooCommerce.post("products", productData);
 
     return NextResponse.json({
       success: true,
       data: response.data,
     });
-  } catch (error: any) {
-    console.error('Error creating product:', error);
+  } catch (error: unknown) {
+    console.error("Error creating product:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to create product";
     return NextResponse.json(
       {
         success: false,
-        error: error.message || 'Failed to create product',
+        error: errorMessage,
       },
       { status: 500 }
     );
   }
 }
-

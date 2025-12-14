@@ -11,6 +11,9 @@ importers:
       '@woocommerce/woocommerce-rest-api':
         specifier: ^1.0.2
         version: 1.0.2
+      axios:
+        specifier: ^1.13.2
+        version: 1.13.2
       lucide-react:
         specifier: ^0.561.0
         version: 0.561.0(react@19.2.1)
